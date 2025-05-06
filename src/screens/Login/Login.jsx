@@ -6,9 +6,14 @@ import { FaGoogle, FaFacebook, FaTwitter } from "react-icons/fa";
 import "./Login.css"; // Ensure you have this CSS file for styling
 
 // Create axios instance with enhanced configuration
+// const BACKEND_URL =
+//   process.env.REACT_APP_LOCAL_API_BASE_URL ||
+//   "https://vercel-backend-seven-flax.vercel.app/";
+
 const BACKEND_URL =
-  process.env.REACT_APP_LOCAL_API_BASE_URL ||
-  "https://vercel-backend-seven-flax.vercel.app/";
+  process.env.NODE_ENV === "development"
+    ? process.env.REACT_APP_LOCAL_API_BASE_URL
+    : process.env.REACT_APP_API_BASE_URL;
 
 const api = axios.create({
   baseURL: BACKEND_URL,
