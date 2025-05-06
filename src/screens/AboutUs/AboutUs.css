@@ -1,0 +1,245 @@
+#aboutus {
+    width: 100vw !important; /* Force 100% viewport width */
+    max-width: 100vw !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-sizing: border-box;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+.container-2 {
+    background-color: var(--secondary-bg);
+    padding: 40px;
+    margin-top: 0;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    position: relative;
+    margin: 0 auto;
+}
+
+.aboutus-title {
+    width: 100%;
+    max-width: 800px;
+    position: relative;
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: black;
+}
+
+.aboutus-title2 {
+    position: relative;
+    font-size: 3rem;
+    font-weight: 600;
+    margin: 2rem 0;
+    color: black;
+    text-align: center;
+    width: 100%;
+    left: 0;
+}
+
+.center-title {
+    text-align: center;
+}
+
+.aboutus-content {
+    width: 100%;
+    max-width: 800px;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: black;
+    margin-bottom: 1.5rem;
+}
+
+.aboutus-img {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 50px;
+    padding: 10px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.image-text-container {
+    display: inline-block;
+    text-align: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    margin: 0 10px 20px;
+}
+
+.aboutus-img1, .aboutus-img2, .aboutus-img3 {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.image-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: black;
+    margin-top: 10px;
+}
+
+.hidden {
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.show {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+}
+
+.image-text-container.show .aboutus-img1,
+.image-text-container.show .aboutus-img2,
+.image-text-container.show .aboutus-img3 {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.aboutus-img4 {
+    width: auto;
+    height: auto;
+    max-height: 550px;
+    max-width: 550px;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    object-fit: contain;
+}
+
+.a-text{
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: black;
+    margin-top: 10px;
+    position: relative;
+    top: -30px;
+}
+
+/* Improved responsive breakpoints */
+@media (max-width: 1400px) {
+    .container-2 {
+        padding: 30px;
+    }
+    
+    .aboutus-title, .aboutus-content {
+        max-width: 60%;
+    }
+    
+    .aboutus-img4 {
+        max-height: 450px;
+        max-width: 35%;
+    }
+    
+    .aboutus-title {
+        font-size: 2.5rem;
+    }
+    
+    .aboutus-title2 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 1100px) {
+    .aboutus-title, .aboutus-content {
+        max-width: 55%;
+    }
+    
+    .aboutus-title {
+        font-size: 2.2rem;
+    }
+    
+    .aboutus-title2 {
+        font-size: 2.2rem;
+    }
+    
+    .aboutus-content {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .aboutus-img4 {
+        position: relative;
+        top: unset;
+        right: unset;
+        margin: 20px auto 40px;
+        display: block;
+        max-width: 100%;
+        max-height: 400px;
+    }
+    
+    .aboutus-title, .aboutus-content {
+        max-width: 100%;
+    }
+    
+    .aboutus-img {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .container-2 {
+        padding: 20px;
+    }
+    
+    .aboutus-title {
+        font-size: 2rem;
+    }
+    
+    .aboutus-title2 {
+        font-size: 2rem;
+    }
+    
+    .aboutus-content {
+        font-size: 1.2rem;
+    }
+    
+    .aboutus-img1, .aboutus-img2, .aboutus-img3 {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .aboutus-title {
+        font-size: 1.8rem;
+    }
+    
+    .aboutus-title2 {
+        font-size: 1.8rem;
+    }
+    
+    .aboutus-content {
+        font-size: 1.1rem;
+    }
+    
+    .aboutus-img1, .aboutus-img2, .aboutus-img3 {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .image-text {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .aboutus-img {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .image-text-container {
+        margin-bottom: 30px;
+    }
+}

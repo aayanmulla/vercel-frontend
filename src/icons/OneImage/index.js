@@ -1,0 +1,1 @@
+export { OneImage } from "./OneImage";

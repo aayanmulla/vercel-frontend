@@ -1,0 +1,1 @@
+export { GpsFixed } from "./GpsFixed";

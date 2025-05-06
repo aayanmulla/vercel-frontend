@@ -1,0 +1,26 @@
+.style-primary-small-wrapper {
+    align-items: center;
+    background-color: white;
+    border: 1px solid;
+    white-space: normal; 
+    /* gap: 8px; */
+    justify-content: center;
+    padding: 12px 24px;
+    position: relative;
+    margin-left: 650px;
+    margin-top: -45px;
+    width: 75px;
+  }
+  
+  .style-primary-small-wrapper .div {
+    color:black;
+    font-family: var(--text-regular-normal-font-family);
+    font-size: var(--text-regular-normal-font-size);
+    font-style: var(--text-regular-normal-font-style);
+    font-weight: var(--text-regular-normal-font-weight);
+    letter-spacing: var(--text-regular-normal-letter-spacing);
+    line-height: var(--text-regular-normal-line-height);
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }  

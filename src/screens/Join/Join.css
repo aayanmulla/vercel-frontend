@@ -1,0 +1,162 @@
+.Cta {
+  width: 100%;
+  background-color: var(--cta-bg);
+  color: white;
+  padding: 80px 20px;
+  box-sizing: border-box;
+}
+
+.column-5 {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.div-3 {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 30px 0;
+  padding: 0 15px;
+}
+
+.heading-4 {
+  align-items: flex-start;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--primary-bg);
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+.text-4 {
+  color: var(--primary-bg);
+  font-size: 18px;
+  max-width: 600px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.actions-2 {
+  padding: 0 15px;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 15px;
+  max-width: 600px;
+  width: 100%;
+}
+
+.email-input {
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  color: #666;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  height: 48px;
+  padding: 0 16px;
+  flex: 1;
+  min-width: 0;
+}
+
+.email-input:focus {
+  outline: none;
+  border-color: var(--primary-color, #0066ff);
+}
+
+.email-input::placeholder {
+  color: #aaa;
+}
+
+.submit-button {
+  background-color: var(--primary-bg, white);
+  border: none;
+  border-radius: 6px;
+  color: var(--cta-bg, #333);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  height: 48px;
+  padding: 0 24px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.submit-button:hover {
+  background-color: var(--primary-hover, #f2f2f2);
+}
+
+.by-clicking-sign-up {
+  margin: 0;
+  font-size: 14px;
+  color: var(--primary-bg);
+  opacity: 0.8;
+  max-width: 600px;
+}
+
+/* Responsive breakpoints */
+@media (min-width: 768px) {
+  .column-5 {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .div-3 {
+    flex: 1;
+    margin-bottom: 0;
+  }
+  
+  .actions-2 {
+    flex: 1;
+  }
+  
+  /* REMOVED the column direction override for .form */
+  /* REMOVED width:100% for .submit-button */
+}
+
+@media (max-width: 767px) {
+  .Cta {
+    padding: 60px 20px;
+  }
+  
+  .heading-4 {
+    font-size: 32px;
+  }
+  
+  /* Keep the form in row layout unless on very small screens */
+}
+
+/* Only use column layout on very small screens */
+@media (max-width: 480px) {
+  .Cta {
+    padding: 40px 15px;
+  }
+  
+  .heading-4 {
+    font-size: 28px;
+  }
+  
+  .text-4 {
+    font-size: 16px;
+  }
+  
+  .by-clicking-sign-up {
+    font-size: 12px;
+  }
+  
+  /* Only add column layout here for very small screens */
+  .form {
+    flex-direction: column;
+  }
+  
+  .submit-button {
+    width: 100%;
+  }
+}

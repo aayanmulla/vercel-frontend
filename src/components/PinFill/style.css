@@ -1,0 +1,13 @@
+.pin-fill {
+    height: 52px;
+    position: relative;
+    width: 48px;
+  }
+  
+  .pin-fill .subtract {
+    height: 38px;
+    left: 10px;
+    position: absolute;
+    top: 9px;
+    width: 28px;
+  }  

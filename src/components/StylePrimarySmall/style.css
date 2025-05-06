@@ -1,0 +1,24 @@
+.style-primary-small {
+    align-items: center;
+    background-color: var(--primitive-color-neutral-black);
+    border: 1px solid;
+    border-color: var(--primitive-color-neutral-black);
+    display: inline-flex;
+    gap: 8px;
+    justify-content: center;
+    padding: 8px 20px;
+    position: relative;
+  }
+  
+  .style-primary-small .button {
+    color: var(--semantic-text-alternate);
+    font-family: var(--text-regular-normal-font-family);
+    font-size: var(--text-regular-normal-font-size);
+    font-style: var(--text-regular-normal-font-style);
+    font-weight: var(--text-regular-normal-font-weight);
+    letter-spacing: var(--text-regular-normal-letter-spacing);
+    line-height: var(--text-regular-normal-line-height);
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }  

@@ -1,0 +1,1 @@
+export { StylePrimarySmallWrapper } from "./StylePrimarySmallWrapper";

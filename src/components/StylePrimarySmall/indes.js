@@ -1,0 +1,1 @@
+export { StylePrimarySmall } from "./StylePrimarySmall";

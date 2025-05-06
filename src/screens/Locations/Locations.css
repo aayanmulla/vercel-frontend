@@ -1,0 +1,210 @@
+.location-layout {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+}
+
+.location-container {
+    background-color: var(--secondary-bg);
+    padding: 40px;
+    margin-top: 0;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.location-div-0 {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+}
+
+.location-heading-1 {
+    width: 100%;
+    max-width: 616px;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--heading-color);
+    margin-bottom: 10px;
+}
+
+.location-text {
+    width: 100%;
+    max-width: 616px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text-color);
+    margin-bottom: 30px;
+}
+
+.row-wrapper {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    gap: 20px;
+    min-height: 250px;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    flex-basis: 50%;
+    z-index: 2;
+}
+
+.locations-card {
+    flex: 1;
+    min-width: 250px;
+    height: 250px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    overflow: auto;
+}
+
+.locations-card:hover {
+    transform: translateY(-5px);
+}
+
+.location-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.location-image {
+    position: absolute;
+    right: 0;
+    top: -200px;
+    width: 45%;
+    max-width: 700px;
+    height: 450px;
+    z-index: 1;
+}
+
+.location-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.loc-button {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    margin-top: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.loc-button:hover {
+    background-color: white;
+    color: black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.loc-button:active {
+    background-color: #2a56c6;
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.loc-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.4);
+}
+
+/* Add this to ensure the button has proper spacing in the card */
+.locations-card .MuiCardContent-root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.locations-card .MuiTypography-body2 {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+    flex-grow: 1;
+}
+
+/* Media queries for responsive behavior */
+@media screen and (max-width: 1200px) {
+    .row-wrapper {
+        min-height: auto;
+    }
+    
+    .location-image {
+        position: relative;
+        top: 0;
+        width: 100%;
+        max-width: 100%;
+        height: 350px;
+        margin-top: 20px;
+    }
+    
+    .cards-container {
+        flex-basis: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .location-container {
+        padding: 20px;
+    }
+    
+    .location-heading-1 {
+        font-size: 32px;
+    }
+    
+    .cards-container {
+        flex-direction: column;
+    }
+    
+    .locations-card {
+        width: 100%;
+        min-width: unset;
+    }
+    
+    .location-image {
+        width: auto;
+        object-fit: contain;
+        height: 300px;
+    }
+    .loc-button{
+        position: relative;
+        top: -40px;
+    }
+}
+
+/* Additional media query for extra small screens */
+@media screen and (max-width: 480px) {
+    .location-image {
+        height: 250px;
+    }
+    
+    .location-heading-1 {
+        font-size: 28px;
+    }
+    .loc-button{
+        position: relative;
+        top: 10px;
+    }
+}

@@ -1,0 +1,60 @@
+.home-img{
+  width: 100%;
+  max-width: auto; /* Adjust as needed */
+  height: auto;  /* Maintain aspect ratio */
+  object-fit: cover; 
+}
+.title {
+  width: 90%; /* Adjust based on your layout */
+  max-width: 700px; 
+  position: absolute;
+  top: 250px;  
+  left: 70px; 
+  font-size: 3.2rem;
+  font-weight: bold;
+  word-wrap: break-word; /* Ensures long words break correctly */
+  white-space: pre-line; /* Allows multi-line typing */
+}
+
+
+.home-content {
+  width: 650px;
+  position: absolute;
+  top: 275px; 
+  left: 800px; 
+  color: black;
+  font-size: 1.5rem;
+}
+.home-search-button{
+  position: absolute;
+  top: 425px; 
+  left: 800px;
+  padding: 15px 25px;
+  display: flex;
+  align-items: center;
+  background-color: black;
+  color: white;
+  transition: background-color 0.3s, color 0.3s;
+  border: 0;
+}
+.home-search-button:hover {
+  background-color: white;  /* Changes background to white */
+  color: black;  /* Changes text color to black for contrast */
+}
+
+.home-learn-more-button{
+  position: absolute;
+  top: 425px; 
+  left: 900px;
+  padding: 15px 25px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  color: black;
+  transition: background-color 0.3s, color 0.3s;
+  border: 0;
+}
+.home-learn-more-button:hover{
+  background-color: black;  /* Changes background to white */
+  color: white;  /* Changes text color to black for contrast */
+}

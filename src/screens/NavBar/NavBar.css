@@ -1,0 +1,214 @@
+/* ✅ Make Navbar Fixed to Top */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 111px;
+    background-color: var(--semantic-background-color-primary);
+    border-bottom: 1px solid var(--semantic-border-primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    box-sizing: border-box;
+    z-index: 1000;
+    transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* ✅ Change Background & Text Color on Scroll */
+.navbar.scrolled {
+    background: white; /* Light background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.scrolled .nav-link,
+.navbar.scrolled .dropdown-item {
+    color: black; /* Change text color to black */
+}
+
+/* ✅ Logo Styling */
+.navbar-brand .navbar-logo {
+    height: 90px;
+    width: auto;
+    padding: 0 20px;
+    margin-right: 0;
+    padding-right: 660px; /* Adjust spacing */
+    cursor: pointer;
+}
+
+/* ✅ Navbar Content */
+.navbar-collapse {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 0;
+    padding-left: 0;
+    width: 100%;
+}
+
+/* ✅ Navigation Links */
+.navbar-nav {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.nav-link {
+    color: var(--semantic-link-primary);
+    font-family: "Roboto", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 28px;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--semantic-link-hover);
+}
+
+/* ✅ Profile Image & Dropdown */
+.profile-container {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+    min-width: 120px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.2s;
+}
+
+.profile-dropdown:hover {
+    background: #ffe5e5;
+}
+
+.dropdown-item {
+    color: black;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 8px 12px;
+    text-align: center;
+    transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+    background: #f0f0f0;
+}
+
+/* ✅ Logout Button */
+.logout {
+    margin: 0;
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* ✅ Change Logout Text Color on Scroll */
+.navbar.scrolled .logout {
+    color: black;
+}
+
+/* ✅ Sign-Up Button */
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    color: white;
+}
+
+.navbar-signup-button {
+    background-color: var(--semantic-button-primary);
+    color: var(--semantic-button-text);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-signup-button:hover {
+    background-color: var(--semantic-button-hover);
+}
+
+/* ✅ Mobile Toggle Button */
+.navbar-toggler {
+    border: none !important;
+    outline: none !important;
+    margin-left: auto;
+}
+
+.navbar-toggler-icon {
+    background-color: var(--semantic-link-primary);
+    border-radius: 4px;
+    position: relative;
+    top: -70px;
+}
+
+/* ✅ Adjustments for Mobile View */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        display: flex;
+        flex-direction: column; /* ✅ Stack only when collapsed */
+        align-items: flex-end;
+        width: 100%;
+        gap:0px;
+    }
+    .navbar-nav {
+        width: 100%;
+        justify-content: center; /* ✅ Center the items */
+        text-align: center;
+        align-items: flex-end;
+        position: relative;
+        top: -70px;
+        gap:0px;
+    }
+    .navbar-logo {
+        padding-right: 20px; /* Reduce padding for mobile */
+        
+    }
+
+    .navbar-nav {
+        gap: 10px; /* Reduce gap between nav items */
+    }
+
+    .nav-link {
+        font-size: 16px; /* Reduce font size for mobile */
+    }
+
+    .profile-dropdown {
+        top: -40px; /* Adjust dropdown position */
+    }
+    .profile-image{
+        position: relative;
+        top: -70px;
+    }
+}

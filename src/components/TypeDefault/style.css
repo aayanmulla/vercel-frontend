@@ -1,0 +1,24 @@
+.type-default {
+    align-items: center;
+    border: 1px solid;
+    border-color: var(--semantic-border-alternate);
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    position: relative;
+    width: 562px;
+    margin-left: 50px;
+  }
+  
+  .type-default .placeholder {
+    color: var(--primitive-color-neutral-neutral-light);
+    flex: 1;
+    font-family: var(--text-regular-normal-font-family);
+    font-size: var(--text-regular-normal-font-size);
+    font-style: var(--text-regular-normal-font-style);
+    font-weight: var(--text-regular-normal-font-weight);
+    letter-spacing: var(--text-regular-normal-letter-spacing);
+    line-height: var(--text-regular-normal-line-height);
+    position: relative;
+    
+  }  
