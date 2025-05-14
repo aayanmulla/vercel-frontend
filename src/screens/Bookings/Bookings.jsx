@@ -1,12 +1,74 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./Bookings.css";
 import Navbar from "../NavBar/NavBar";
 import Reservation from "../Reservations/Reservation";
 import Footer from "../Footer/Footer";
-import { FaCalendarAlt } from "react-icons/fa"; // Import calendar icon
+import { FaCalendarAlt } from "react-icons/fa";
 import { renderTicketToHTML } from "../Ticket/helper.tsx";
+
+// Create consistent API configuration based on environment
+const BACKEND_URL = 
+  process.env.NODE_ENV === "development"
+    ? process.env.REACT_APP_LOCAL_API_BASE_URL || "http://localhost:5001"
+    : process.env.REACT_APP_API_BASE_URL;
+
+const api = axios.create({
+  baseURL: BACKEND_URL,
+  timeout: 10000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
+});
+
+// Add request and response interceptors for logging
+api.interceptors.request.use(
+  (config) => {
+    // Add token to headers if available
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    console.log("Bookings API Request:", config);
+    return config;
+  },
+  (error) => {
+    console.error("Bookings Request Error:", error);
+    return Promise.reject(error);
+  }
+);
+
+api.interceptors.response.use(
+  (response) => {
+    console.log("Bookings API Response:", response);
+    return response;
+  },
+  (error) => {
+    console.error("Bookings Response Error:", error);
+    if (error.response) {
+      console.error("Error data:", error.response.data);
+      console.error("Error status:", error.response.status);
+    } else if (error.request) {
+      console.error("No response received:", error.request);
+    } else {
+      console.error("Error message:", error.message);
+    }
+    return Promise.reject(error);
+  }
+);
+
+// API endpoints
+const API_ENDPOINTS = {
+  PARKING_SLOTS: "/api/parking/slots",
+  LATEST_BOOKED_SLOT: "/api/slots/latest-booked-slot",
+  RESERVED_SLOTS: "/api/reserved/slots",
+  SLOT_DETAILS: (slotId) => `/api/reserved/slotNumber/${slotId}`,
+  UPDATE_RESERVATION: (objectId) => `/api/reserved/${objectId}`,
+  SEND_EMAIL: "/api/send-email",
+};
 
 const Bookings = () => {
   const [parkingSlots, setParkingSlots] = useState([]);
@@ -28,19 +90,16 @@ const Bookings = () => {
   const fetchAllData = async () => {
     setLoading(true);
     try {
+      // Use Promise.all with the new API setup
       const [parkingRes, latestRes, reservedRes] = await Promise.all([
-        fetch("http://localhost:5001/api/parking/slots"),
-        fetch("http://localhost:5001/api/slots/latest-booked-slot"),
-        fetch("http://localhost:5001/api/reserved/slots"),
+        api.get(API_ENDPOINTS.PARKING_SLOTS),
+        api.get(API_ENDPOINTS.LATEST_BOOKED_SLOT),
+        api.get(API_ENDPOINTS.RESERVED_SLOTS),
       ]);
 
-      if (!parkingRes.ok || !latestRes.ok || !reservedRes.ok) {
-        throw new Error("Failed to fetch one or more data sources");
-      }
-
-      const parkingData = await parkingRes.json();
-      const latestData = await latestRes.json();
-      const reservedData = await reservedRes.json();
+      const parkingData = parkingRes.data;
+      const latestData = latestRes.data;
+      const reservedData = reservedRes.data;
 
       const parkingSlots = parkingData.parkingSlots || [];
       const reservedSlots = reservedData.parkingSlots || [];
@@ -77,8 +136,8 @@ const Bookings = () => {
       setParkingSlots(updatedSlots);
       return updatedSlots;
     } catch (error) {
-      console.error("Error fetching data:", error);
-      setError(error.message);
+      console.error("Error fetching booking data:", error);
+      setError("Failed to load parking slots. Please try again later.");
       return [];
     } finally {
       setLoading(false);
@@ -87,7 +146,7 @@ const Bookings = () => {
 
   useEffect(() => {
     fetchAllData();
-    const interval = setInterval(fetchAllData, 180000);
+    const interval = setInterval(fetchAllData, 180000); // Refresh every 3 minutes
     return () => clearInterval(interval);
   }, []);
 
@@ -109,31 +168,10 @@ const Bookings = () => {
         try {
           console.log("Fetching slot details for slotId:", slotId);
 
-          const slotRes = await fetch(
-            `http://localhost:5001/api/reserved/slotNumber/${slotId}`,
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
-            },
-          );
-          if (!slotRes.ok) {
-            console.log("succeeded");
-          }
-
-          if (!slotRes.ok) {
-            const errorText = await slotRes.text();
-            console.error("Error fetching slot:", slotRes.status, errorText);
-            throw new Error("Slot not found");
-          }
-
-          // if (!slotRes.ok) {
-          //   console.log("succeeded");
-          // }
-          //
-          const slotData = await slotRes.json();
+          // Get slot details
+          const slotRes = await api.get(API_ENDPOINTS.SLOT_DETAILS(slotId));
+          const slotData = slotRes.data;
+          
           if (!slotData._id) {
             alert("Slot not found. Please try again.");
             return;
@@ -142,33 +180,22 @@ const Bookings = () => {
           const objectId = slotData._id;
           console.log("Fetched objectId:", objectId);
 
-          const updateRes = await fetch(
-            `http://localhost:5001/api/reserved/${objectId}`,
+          // Update the reserved slot
+          await api.patch(
+            API_ENDPOINTS.UPDATE_RESERVATION(objectId),
             {
-              method: "PATCH",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
-              body: JSON.stringify({
-                isOccupied: true,
-                paymentId: response.razorpay_payment_id,
-                timeSlot: selectedTimeSlot,
-                bookedAt: bookingDate.toISOString(),
-                status: "occupied",
-              }),
-            },
+              isOccupied: true,
+              paymentId: response.razorpay_payment_id,
+              timeSlot: selectedTimeSlot,
+              bookedAt: bookingDate.toISOString(),
+              status: "occupied",
+            }
           );
-
-          if (!updateRes.ok) {
-            const errorText = await updateRes.text();
-            console.error("Error updating slot:", updateRes.status, errorText);
-            throw new Error("Failed to update slot status");
-          }
 
           console.log("Slot successfully updated!");
           await fetchAllData();
 
+          // Send confirmation email
           const user = JSON.parse(localStorage.getItem("user"));
           const userEmail = user?.email;
 
@@ -180,29 +207,23 @@ const Bookings = () => {
               paymentId: response.razorpay_payment_id,
             };
             const ticketHTML = renderTicketToHTML(bookingData);
-            console.log("Generated ticket HTML:", ticketHTML);
-
-            await fetch("http://localhost:5001/api/send-email", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                to: userEmail,
-                subject: "Booking Confirmation",
-                html: ticketHTML,
-              }),
+            
+            await api.post(API_ENDPOINTS.SEND_EMAIL, {
+              to: userEmail,
+              subject: "Booking Confirmation",
+              html: ticketHTML,
             });
           } else {
             console.error("Email not found in localStorage.");
           }
+          
           alert(
-            `Payment successful! Your slot has been reserved for ${bookingDate.toLocaleDateString()} ${selectedTimeSlot}`,
+            `Payment successful! Your slot has been reserved for ${bookingDate.toLocaleDateString()} ${selectedTimeSlot}`
           );
         } catch (error) {
           console.error("Payment processing error:", error);
           alert(
-            "Payment succeeded but error updating reservation. Contact support.",
+            "Payment succeeded but error updating reservation. Contact support."
           );
         }
       },
